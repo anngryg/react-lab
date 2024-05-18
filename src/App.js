@@ -1,4 +1,5 @@
 import './App.css';
+import "milligram";
 import { useState } from 'react';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
     }
 
     function handleClick(){
-      if (isLogggedIn==true){
+      if (isLogggedIn===true){
         setIsLoggedIn(false)
       }else{
         setIsLoggedIn(true)
