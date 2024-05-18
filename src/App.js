@@ -1,43 +1,22 @@
 import './App.css';
 import "milligram";
 import { useState } from 'react';
+import LoginForm from "./LoginForm";
+import UserPanel from './UserPanel';
 
 function App() {
   
-    const [email, setEmail] = useState('');
-    const [isLogggedIn, setIsLoggedIn] = useState(false);
-    function handleChange(event) {
-        setEmail(event.target.value);
-    }
+    const [authenticatedUserName, setAuthenticatedUserName] = useState("");
 
     function handleClick(){
-      if (isLogggedIn===true){
-        setIsLoggedIn(false)
-      }else{
-        setIsLoggedIn(true)
-      }
+      setAuthenticatedUserName("")
     }
 
-    let message = "Masz krótki e-mail"
-    
-    if(email.length>15){
-      message = "Masz dlugi e-mail"
-    }else if(email.length> 5){
-      message = "Masz ok e-mail"
-    }
     let content;
-    if(isLogggedIn==true){
-      content = <div>
-        <h2>Witaj, {email}</h2>
-        <button onClick={handleClick}>Wyloguj</button> 
-      </div>
+    if(authenticatedUserName){
+      content = <UserPanel/>
     }else{
-      content = <div>
-        <h2>Twój e-mail to {email}</h2>
-        <h3>{message}</h3>
-        <input type="text" value={email} onChange={handleChange}/>
-        <button onClick={handleClick}>Wchodzę</button> 
-      </div>
+      content = <LoginForm onLogin={(email) => setAuthenticatedUserName(email)} buttonLabel="Zaloguj się"/>
     }
 
     return (
